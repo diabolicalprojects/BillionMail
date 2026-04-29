@@ -1,0 +1,60 @@
+:root {
+	--color-primary-1: #ffffff;
+	--color-primary-2: #111111;
+	--color-primary-3: #333333;
+	--color-primary-hover-1: #e0e0e0;
+	--color-warning-1: #f0ad4e;
+	--color-error-1: #ef0808;
+	--color-bg-1: #000000;
+	--color-bg-2: #0a0a0a;
+	--color-bg-3: #111111;
+	--color-bg-4: #1a1a1a;
+	--color-text-1: #ffffff;
+	--color-text-2: #cccccc;
+	--color-text-3: #999999;
+	--color-text-4: #666666;
+	--color-text-5: #ffffff;
+	--color-border-1: #222222;
+	--color-border-2: #333333;
+	--color-menu-1: #cccccc;
+	--color-menu-active-1: rgba(255, 255, 255, 0.1);
+	--color-menu-active-2: #ffffff;
+	--color-card-text-1: #ffffff;
+	--color-radio-1: #222222;
+	--color-radio-2: #ffffff;
+	--color-button-text-1: #000000;
+	--color-table-th-1: #111111;
+	--color-table-td-1: #000000;
+	--color-command: #000000;
+}
+
+:root[theme-mode='dark'] {
+	--color-primary-1: #ffffff;
+	--color-primary-2: #111111;
+	--color-primary-3: #333333;
+	--color-primary-hover-1: #e0e0e0;
+	--color-warning-1: #f0ad4e;
+	--color-error-1: #ef0808;
+	--color-bg-1: #000000;
+	--color-bg-2: #0a0a0a;
+	--color-bg-3: #111111;
+	--color-bg-4: #1a1a1a;
+	--color-text-1: #ffffff;
+	--color-text-2: #cccccc;
+	--color-text-3: #999999;
+	--color-text-4: #666666;
+	--color-text-5: #ffffff;
+	--color-border-1: #222222;
+	--color-border-2: #333333;
+	--color-menu-1: #cccccc;
+	--color-menu-active-1: rgba(255, 255, 255, 0.1);
+	--color-menu-active-2: #ffffff;
+	--color-card-text-1: #ffffff;
+	--color-radio-1: #222222;
+	--color-radio-2: #ffffff;
+	--color-button-text-1: #000000;
+	--color-table-th-1: #111111;
+	--color-table-td-1: #000000;
+	--color-command: #000000;
+}
+

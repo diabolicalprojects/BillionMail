@@ -1,0 +1,61 @@
+# --- Stage 1: Build Frontend (Vue 3) ---
+FROM node:22-alpine AS frontend-builder
+WORKDIR /app/core/frontend
+COPY core/frontend/package.json ./
+RUN npm install
+COPY core/frontend ./
+RUN npm run build
+
+# --- Stage 2: Build Backend (Go) ---
+FROM golang:1.22-alpine AS backend-builder
+WORKDIR /app/core
+COPY core/go.mod core/go.sum ./
+RUN go mod download
+COPY core ./
+# Copy built frontend from Stage 1 to core/public/dist
+COPY --from=frontend-builder /app/core/public/dist ./public/dist
+RUN go build -ldflags="-s -w" -o /app/billionmail main.go
+
+# --- Stage 3: Final Production Image ---
+FROM alpine:3.20
+LABEL maintainer="BillionMail Custom"
+
+WORKDIR /opt/billionmail
+
+# Install system dependencies
+RUN apk add --no-cache \
+    bash \
+    ca-certificates \
+    curl \
+    supervisor \
+    rsyslog \
+    tzdata \
+    busybox-extras \
+    postgresql-client \
+    fail2ban \
+    iptables \
+    ipset \
+    && rm -rf /var/cache/apk/*
+
+# Copy built binary
+COPY --from=backend-builder /app/billionmail /opt/billionmail/core/billionmail
+
+# Copy required core files
+COPY core/manifest /opt/billionmail/core/manifest
+COPY core/languages /opt/billionmail/core/languages
+COPY core/resource /opt/billionmail/core/resource
+COPY core/template /opt/billionmail/core/template
+# Public files come from the builder stage
+COPY --from=backend-builder /app/core/public /opt/billionmail/core/public
+
+# Copy deployment scripts and configs
+COPY Dockerfiles/core/stop-supervisor.sh /stop-supervisor.sh
+COPY Dockerfiles/core/core.sh /core.sh
+COPY Dockerfiles/core/restart_fail2ban.sh /restart_fail2ban.sh
+COPY Dockerfiles/core/supervisord.conf /etc/supervisor/supervisord.conf
+COPY Dockerfiles/core/fail2ban.conf /etc/fail2ban/fail2ban.conf
+
+RUN chmod +x /stop-supervisor.sh /core.sh /restart_fail2ban.sh /opt/billionmail/core/billionmail
+
+ENTRYPOINT ["/core.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
