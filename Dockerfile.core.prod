@@ -13,7 +13,7 @@ COPY core/go.mod core/go.sum ./
 RUN go mod download
 COPY core ./
 # Copy built frontend from Stage 1 to core/public/dist
-COPY --from=frontend-builder /app/core/public/dist ./public/dist
+COPY --from=frontend-builder /app/core/frontend/dist ./public/dist
 RUN go build -ldflags="-s -w" -o /app/billionmail main.go
 
 # --- Stage 3: Final Production Image ---
