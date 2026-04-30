@@ -424,7 +424,7 @@ func (m *ConfigManager) modifyPostfixNetworksText(lines []string, configs []map[
 	result = append(result, "        billionmail-network:")
 	result = append(result, "          aliases:")
 	result = append(result, "            - postfix")
-	result = append(result, "          ipv4_address: 172.66.1.100")
+	result = append(result, "          ipv4_address: 172.67.1.100")
 
 	// Add custom network configurations
 	for _, cfg := range configs {
@@ -670,8 +670,8 @@ func (m *ConfigManager) updateMainCf(ctx context.Context, configs []map[string]i
 	}
 	contentStr := string(content)
 
-	// check smtp_bind_address=172.66.1.100
-	defaultBindIP := "172.66.1.100"
+	// check smtp_bind_address=172.67.1.100
+	defaultBindIP := "172.67.1.100"
 	smtpBindRegex := regexp.MustCompile(`(?m)^[\s]*smtp_bind_address[\s]*=[\s]*(.*)$`)
 	smtpBindMatches := smtpBindRegex.FindStringSubmatch(contentStr)
 

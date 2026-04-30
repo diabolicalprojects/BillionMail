@@ -92,13 +92,13 @@ func (s *MultiIPDomainService) generateNetworkConfig(ctx context.Context, tx gdb
 		}
 	}
 
-	// Start from 172.66.2.0/24, find the first unused subnet
+	// Start from 172.67.2.0/24, find the first unused subnet
 	var subnet string
 	var postfixIP string
 
 	for i := 2; i <= 254; i++ {
-		candidateSubnet := fmt.Sprintf("172.66.%d.0/24", i)
-		candidatePostfixIP := fmt.Sprintf("172.66.%d.100", i)
+		candidateSubnet := fmt.Sprintf("172.67.%d.0/24", i)
+		candidatePostfixIP := fmt.Sprintf("172.67.%d.100", i)
 
 		if !usedSubnetMap[candidateSubnet] {
 			subnet = candidateSubnet

@@ -1327,7 +1327,7 @@ HTTPS_PORT=${HTTPS_PORT}
 TZ=${BILLIONMAIL_TIME_ZONE}
 
 # Default containers IPV4 intranet segment
-IPV4_NETWORK=172.66.1
+IPV4_NETWORK=172.67.1
 
 # Enable fail2ban Access restrictions, specify that the IP exceeds the access limit
 FAIL2BAN_INIT=y

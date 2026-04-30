@@ -218,4 +218,8 @@ networks:
     driver: bridge
     driver_opts:
       com.docker.network.bridge.name: br-billionmail
+    ipam:
+      driver: default
+      config:
+        - subnet: ${IPV4_NETWORK:-172.67.1}.0/24
 
