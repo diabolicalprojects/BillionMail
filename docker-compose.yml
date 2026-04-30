@@ -217,7 +217,7 @@ networks:
   billionmail-network:
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.name: br-billionmail
+      com.docker.network.bridge.name: br-bm-custom
     ipam:
       driver: default
       config:
